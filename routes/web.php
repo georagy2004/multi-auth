@@ -1,5 +1,10 @@
 <?php
+use App\User;
 
+use App\Task;
+use Illuminate\Http\Request;
+
+use App\Http\Resources\User as UserResource;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +16,10 @@
 |
 */
 
+// Route::get('/json',function(){
+//     $user = User::where('id', 1)->first();
+//     return new UserResource($user);
+// });
 Route::get('/', function () {
     return view('welcome');
 });
@@ -25,3 +34,8 @@ Route::prefix('admin')->group(function(){
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('/api/task', function(Request $request){
+    Task::create($request->all());
+    return $request->all();
+});
